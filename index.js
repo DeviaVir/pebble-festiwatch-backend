@@ -5,10 +5,9 @@ var koa = require('koa'),
     moment = require('moment'),
     Partyflock = require('partyflock');
 
+// extra environment vars
 var debug = false,
     endpoint = 'partyflock.nl';
-
-// extra environment vars
 if(process.env.DEBUG) {
   debug = !!process.env.DEBUG;
 }
