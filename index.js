@@ -78,7 +78,7 @@ if(process.env.CONSUMERKEY && process.env.CONSUMERSECRET) {
     .use(router.allowedMethods())
     .use(json());
 
-  app.listen(3000);
+  app.listen(process.env.PORT || 3000);
 }
 else {
   console.error('Process variables CONSUMERKEY and CONSUMERSECRET not set, exiting!');
