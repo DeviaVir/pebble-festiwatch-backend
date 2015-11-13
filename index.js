@@ -22,7 +22,24 @@ if(process.env.CONSUMERKEY && process.env.CONSUMERSECRET) {
 
   // router: fetch agenda for today
   router.get('/', function *() {
-    var result = yield partyflockInstance.date.lookup(moment().format('YYYYMMDD')).then(function(res) {
+    var headers = {
+      'Pf-ResultWish': 'date(agenda(party(name,stamp,location(name),visitors(user(id)))))'
+    };
+    if(this.request && this.request.query) {
+      if('latitude' in this.request.query && this.request.query.latitude) {
+        headers['Pf-Latitude'] = parseFloat(this.request.query.latitude, 10);
+      }
+      if('longitude' in this.request.query && this.request.query.longitude) {
+        headers['Pf-Longitude'] = parseFloat(this.request.query.longitude, 10);
+      }
+      if('radius' in this.request.query && this.request.query.radius) {
+        headers['Pf-Radius'] = parseInt(this.request.query.radius, 10);
+      }
+
+      console.log('params', this.request.query, headers);
+    }
+    
+    var result = yield partyflockInstance.date.lookup(moment().format('YYYYMMDD'), headers).then(function(res) {
       if(!res) {
         return Promise.reject('Agenda lookup failed!');
       }
