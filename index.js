@@ -15,6 +15,22 @@ if(process.env.ENDPOINT) {
   endpoint = process.env.ENDPOINT;
 }
 
+function compare(a,b) {
+  if (parseFloat(a.time_start) < parseFloat(b.time_start)) {
+    return -1;
+  }
+  else if (parseFloat(a.time_start) > parseFloat(b.time_start)) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
+
+function sortLineup(lineup) {
+  return lineup.sort(compare);
+}
+
 // we need CONSUMERKEY and CONSUMERSECRET to operate successfully
 if(process.env.CONSUMERKEY && process.env.CONSUMERSECRET) { 
   // instantiate partyflock
@@ -82,6 +98,24 @@ if(process.env.CONSUMERKEY && process.env.CONSUMERSECRET) {
       if(!res) {
         return Promise.reject('Party lookup failed!');
       }
+
+      if('party' in res && 
+          res.party && 'area' in res.party &&
+          res.party.area) {
+        if(res.party.area instanceof Array) {
+          res.party.area.forEach(function(area, i) {
+            sortLineup(area.lineup, function(lineup) {
+              res.party.area[i].lineup = lineup;
+            });
+          });
+        }
+        else {
+          sortLineup(res.party.area.lineup, function(lineup) {
+            res.party.area.lineup = lineup;
+          });
+        }
+      }
+
       return {'success': true, 'data': res, 'message': ''};
     }).catch(function(err) {
       return {'success': false, 'message': err};
