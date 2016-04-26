@@ -76,7 +76,7 @@ if(process.env.CONSUMERKEY && process.env.CONSUMERSECRET) {
   router.get('/party/:id', function *() {
     var id = parseInt(this.params.id, 10);
     var headers = {
-      'Pf-ResultWish': 'party(name,genre(name),area(name,lineup(id,time_start,time_end,artist(name),type)))'
+      'Pf-ResultWish': 'party(name,genre(name),area(genre,lineup(id,time_start,time_end,artist(name),type)))'
     };
     var result = yield partyflockInstance.party.lookup(id, headers).then(function(res) {
       if(!res) {
