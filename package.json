@@ -12,7 +12,7 @@
     "test-int": "node test/run integration"
   },
   "engines": {
-    "node": "4.2.1"
+    "node": "4.8.4"
   },
   "author": "Chase Sillevis <chase@sillevis.net>",
   "license": "MIT",
