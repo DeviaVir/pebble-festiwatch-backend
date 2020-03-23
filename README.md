@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/DeviaVir/pebble-festiwatch-backend.svg)](https://travis-ci.org/DeviaVir/pebble-festiwatch-backend) [![Greenkeeper badge](https://badges.greenkeeper.io/DeviaVir/pebble-festiwatch-backend.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/DeviaVir/pebble-festiwatch-backend.svg)](https://travis-ci.org/DeviaVir/pebble-festiwatch-backend) 
 # pebble-festiwatch-backend
 
 API for the festiwatch pebble app
